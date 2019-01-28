@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Router, browserHistory, Route, Link } from 'react-router';
 import './App.css';
-
+const NavBar = () => (
+  <div className="navbar">
+    <Link to="/">Feed</Link>
+    <Link to="/profile">Profile</Link>
+    <Link to="/about">About</Link>
+  </div>
+);
+const Template = ({ title }) => (
+  <div>
+    <NavBar />
+    <p className="page-info">
+      This is the {title} page.
+    </p>
+  </div>
+);
+const Feed = (props) => (
+  <Template title="Feed"/>
+);
+const Profile = (props) => (
+  <Template title="Profile"/>
+);
+const About = (props) => (
+  <Template title="About"/>
+);
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router history={browserHistory}>
+        <Route path="/" component={Feed}/>
+        <Route path="/profile" component={Profile}/>
+        <Route path="/about" component={About}/>
+      </Router>
     );
   }
 }
-
 export default App;
